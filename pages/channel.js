@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 import Banner from "../components/Banner";
 import PodcastList from "../components/PodcastList";
 import SeriesList from "../components/SeriesList";
-import Error from "next/error";
+import Error from "./_error";
 
 export default class extends React.Component {
   static async getInitialProps({ query, res }) {
