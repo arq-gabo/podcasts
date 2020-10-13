@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { Link } from "../routes";
+import slug from "../helpers/slug";
 
 export default class ChannelGrid extends React.Component {
   render() {
@@ -7,7 +8,15 @@ export default class ChannelGrid extends React.Component {
     return (
       <div className="channels">
         {channels.map((channel) => (
-          <Link href={`/channel?id=${channel.id}`} prefetch>
+          <Link
+            route="channel"
+            params={{
+              slug: slug(channel.title),
+              id: channel.id,
+            }}
+            prefetch
+            key={channel.id}
+          >
             <a className="channel">
               <img src={channel.urls.logo_image.original} alt="" />
               <h2>{channel.title}</h2>
@@ -23,24 +32,24 @@ export default class ChannelGrid extends React.Component {
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
           }
 
-          .channel {
-            display: block;
-            border-radius: 3px;
-            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-            margin-botton: 0.5em;
-          }
-
-          .channel img {
-            width: 100%;
-          }
-
-          h1 {
-            padding: 5px;
-            font-size: 0.9em;
-            font-weight: 600;
-            margin: 0;
-            text-align: center;
-          }
+        }
+        .channel {
+          display: block;
+          margin-bottom: 0.5em;
+          color: #333;
+          text-decoration: none;
+        }
+        .channel img {
+          border-radius: 3px;
+          box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+          width: 100%;
+        }
+        h2 {
+          padding: 5px;
+          font-size: 0.9em;
+          font-weight: 600;
+          margin: 0;
+          text-align: center;
         `}</style>
       </div>
     );

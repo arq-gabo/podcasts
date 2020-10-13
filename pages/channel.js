@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import Banner from "../components/Banner";
 import PodcastList from "../components/PodcastList";
-import SeriesList from "../components/SeriesList";
+import ChannelGrid from "../components/ChannelGrid";
 import Error from "./_error";
 
 export default class extends React.Component {
@@ -53,7 +53,7 @@ export default class extends React.Component {
         <h1>{channel.title}</h1>
         {series.length > 0 && (
           <div>
-            <SeriesList series={series} />
+            <ChannelGrid channels={series} />
           </div>
         )}
         {audioClips.length > 0 && (
