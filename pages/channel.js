@@ -3,6 +3,7 @@ import Banner from "../components/Banner";
 import PodcastListWithClick from "../components/PodcastListWithClick";
 import ChannelGrid from "../components/ChannelGrid";
 import Error from "./_error";
+import PodcastPlayer from "../components/PodcastPlayer";
 
 export default class extends React.Component {
   constructor(props) {
@@ -52,6 +53,13 @@ export default class extends React.Component {
     });
   };
 
+  closePodcast = () => {
+    event.preventDefault();
+    this.setState({
+      openPodcast: null,
+    });
+  };
+
   render() {
     const { channel, audioClips, series, statusCode } = this.props;
 
@@ -65,7 +73,11 @@ export default class extends React.Component {
       <Layout title={channel.title}>
         <Banner channel={channel} />
 
-        {openPodcast && <div>Hay un podcast abierto</div>}
+        {openPodcast && (
+          <div className="modal">
+            <PodcastPlayer clip={openPodcast} onClose={this.closePodcast} />
+          </div>
+        )}
 
         <h1>{channel.title}</h1>
         {series.length > 0 && (
@@ -98,6 +110,16 @@ export default class extends React.Component {
             font-weight: 600;
             margin: 0;
             text-align: center;
+          }
+
+          .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 99999;
+            background: black;
           }
         `}</style>
       </Layout>
